@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="zh Hant">
+<head>
+<meta charset="UTF 8">
+<meta name="viewport" content="width=device width, initial scale=1.0">
+<title>讓情緒流動 · 情緒詞語 / 心情 / 打氣卡</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root{
+--paper:#F3F6EF;
+--card:#FFFFFF;
+--ink:#2B3328;
+--ink soft:#6B7568;
+--line:#DCE6D6;
+--accent:#4C7A52;
+--accent deep:#365C3B;
+--orange:#EDA857;
+--orange deep:#D98B3E;
+
+--happy:#EDA857;
+--excited:#E67E50;
+--sad:#4F7C6B;
+--angry:#C97B3D;
+--anxious:#8B9B5E;
+--disgusted:#604848;
+--wronged:#D98B5F;
+--lonely:#2F4F3A;
+--shocked:#506880;
+--collapsed:#703F3F;
+
+--cat academic:#365C3B;
+--cat casual:#EDA857;
+--cat canton:#5C8A63;
+--cat english:#C97B3D;
+}
+
+*{box sizing:border box;}
+html{scroll behavior:smooth;}
+body{
+margin:0;
+background:
+radial gradient(1200px 600px at 10%  10%, #E7F0E2 0%, transparent 60%),
+radial gradient(900px 500px at 110% 0%, #FBEBD8 0%, transparent 55%),
+var(--paper);
+color:var(--ink);
+font family:'Noto Sans TC','Inter',system ui,sans serif;
+line height:1.6;
+ webkit font smoothing:antialiased;
+}
+h1,h2,h3,.serif{font family:'Noto Serif TC', serif;}
+.wrap{max width:640px;margin:0 auto;padding:20px 18px 64px;}
+
+header.hero{padding:26px 4px 14px;}
+.eyebrow{
+font family:'Inter',sans serif;font size:12px;letter spacing:.16em;
+text transform:uppercase;color:var(--accent deep);font weight:600;
+}
+h1{font size:27px;margin:8px 0 4px;color:var(--ink);}
+.lead{font size:16px;font weight:600;color:var(--accent deep);margin:0 0 12px;font family:'Noto Sans TC',sans serif;}
+.manifesto{
+margin:0 0 4px;padding:14px 16px;background:#fff;border left:4px solid var(--accent);
+border radius:4px 14px 14px 4px;font family:'Noto Serif TC',serif;font size:14px;
+line height:1.9;color:var(--ink);box shadow:0 6px 16px rgba(43,51,40,.06);
+}
+
+.tabbar{
+display:flex;gap:6px;background:#fff;border:1px solid var(--line);
+border radius:999px;padding:5px;margin:18px 0 22px;
+position:sticky;top:12px;z index:20;box shadow:0 6px 18px rgba(43,51,40,.06);
+}
+.tabbar button{
+flex:1;border:none;background:transparent;padding:10px 6px;border radius:999px;
+font family:'Inter',sans serif;font weight:600;font size:13px;color:var(--ink soft);
+cursor:pointer;transition:background .25s,color .25s;
+}
+.tabbar button.active{background:var(--accent);color:#fff;}
+.tabbar button:focus visible{outline:2px solid var(--accent deep);outline offset:2px;}
+
+section.panel{display:none;}
+section.panel.active{display:block;animation:fade .35s ease;}
+@keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+.section title{font size:19px;margin:0 0 4px;}
+.section sub{color:var(--ink soft);font size:13.5px;margin:0 0 16px;}
+
+.chip row{display:flex;flex wrap:wrap;gap:8px;margin bottom:20px;}
+.chip{
+border:1.5px solid var(--c,var(--accent));background:#fff;color:var(--c,var(--accent));
+font family:'Inter',sans serif;font weight:600;font size:13.5px;
+padding:9px 14px;border radius:999px;cursor:pointer;transition:.2s;
+}
+.chip .em{margin right:5px;}
+.chip:hover{background:color mix(in srgb, var(--c,var(--accent)) 12%, white);}
+.chip.active{background:var(--c,var(--accent));color:#fff;}
+.chip:focus visible{outline:2px solid var(--accent deep);outline offset:2px;}
+
+.chip happy{--c:var(--happy);}
+.chip excited{--c:var(--excited);}
+.chip sad{--c:var(--sad);}
+.chip angry{--c:var(--angry);}
+.chip anxious{--c:var(--anxious);}
+.chip disgusted{--c:var(--disgusted);}
+.chip wronged{--c:var(--wronged);}
+.chip lonely{--c:var(--lonely);}
+.chip shocked{--c:var(--shocked);}
+.chip collapsed{--c:var(--collapsed);}
+
+#bankArea{display:none;}
+#bankArea.show{display:block;}
+.bank head{display:flex;align items:center;gap:10px;margin:6px 0 16px;}
+.bank head .dot{width:10px;height:10px;border radius:50%;background:var(--dotcolor,var(--accent));}
+.bank head h3{margin:0;font size:17px;}
+
+.cat group{margin bottom:18px;}
+.cat label{
+font family:'Inter',sans serif;font size:11.5px;font weight:700;letter spacing:.08em;
+text transform:uppercase;color:var(--catcolor,var(--accent));margin:0 0 8px;
+display:flex;align items:center;gap:6px;
+}
+.cat label .hint{
+font weight:500;text transform:none;letter spacing:0;color:var(--ink soft);
+font family:'Noto Sans TC',sans serif;font size:11.5px;
+}
+
+.word item{
+background:var(--card);border:1px solid var(--line);border left:4px solid var(--catcolor,var(--accent));
+border radius:14px;margin bottom:9px;overflow:hidden;
+}
+.word head{
+width:100%;display:flex;align items:baseline;justify content:space between;gap:10px;
+background:none;border:none;padding:12px 14px;cursor:pointer;text align:left;
+}
+.word term{font family:'Noto Serif TC',serif;font weight:600;font size:16px;color:var(--ink);}
+.word reading{font family:'Inter',sans serif;font size:11.5px;color:var(--ink soft);margin left:8px;}
+.word toggle{font size:16px;color:var(--catcolor,var(--accent));font family:'Inter',sans serif;flex shrink:0;}
+.word body{padding:0 14px 14px;}
+.word def{margin:0 0 8px;font size:13.8px;color:var(--ink soft);}
+.word examples{margin:0;padding left:18px;font size:13.8px;}
+.word examples li{margin bottom:4px;}
+.word head:focus visible{outline:2px solid var(--accent deep);outline offset: 2px;}
+
+textarea#moodInput{
+width:100%;min height:140px;border:1.5px solid var(--line);border radius:16px;
+padding:14px;font family:'Noto Sans TC',sans serif;font size:15px;color:var(--ink);
+background:#fff;resize:vertical;
+}
+textarea#moodInput:focus visible{outline:2px solid var(--accent deep);outline offset:1px;}
+.write meta{display:flex;justify content:space between;align items:center;margin:8px 0 16px;flex wrap:wrap;gap:8px;}
+#charCount{font family:'Inter',sans serif;font size:12.5px;color:var(--ink soft);}
+.btn primary{
+background:var(--accent);color:#fff;border:none;border radius:999px;
+padding:12px 22px;font family:'Inter',sans serif;font weight:600;font size:14.5px;
+cursor:pointer;transition:background .2s;
+}
+.btn primary:hover{background:var(--accent deep);}
+.btn primary:focus visible{outline:2px solid var(--accent deep);outline offset:3px;}
+.btn ghost{
+background:none;border:1.5px solid var(--line);color:var(--ink soft);border radius:999px;
+padding:10px 18px;font family:'Inter',sans serif;font weight:600;font size:13.5px;cursor:pointer;
+}
+
+#resultArea{margin top:22px;}
+#resultArea[hidden]{display:none;}
+.result tag{
+display:inline flex;align items:center;gap:6px;padding:6px 13px;border radius:999px;
+background:var(--rc,var(--accent));color:#fff;font family:'Inter',sans serif;font weight:700;font size:13px;
+margin bottom:14px;
+}
+.encourage box{
+background:#fff;border:1px solid var(--line);border radius:16px;padding:14px 16px;
+font size:14.5px;color:var(--ink);margin bottom:16px;border left:4px solid var(--orange);
+}
+.suggest title{font size:13px;font weight:700;color:var(--ink soft);margin:0 0 8px;font family:'Inter',sans serif;text transform:uppercase;letter spacing:.06em;}
+
+.card grid{display:grid;grid template columns:repeat(3,1fr);gap:12px;margin:6px 0 18px;}
+@media(min width:520px){.card grid{grid template columns:repeat(5,1fr);}}
+.card{
+perspective:1000px;aspect ratio:3/4.2;background:none;border:none;padding:0;cursor:pointer;
+}
+.card inner{
+position:relative;width:100%;height:100%;transition:transform .65s cubic bezier(.2,.8,.2,1);
+transform style:preserve 3d;
+}
+.card.flipped .card inner{transform:rotateY(180deg);}
+.card face{
+position:absolute;inset:0;border radius:14px;backface visibility:hidden;
+display:flex;align items:center;justify content:center;padding:10px;
+}
+.card pattern{box shadow:0 6px 16px rgba(43,51,40,.18);}
+.card pattern .seal{width:22px;height:22px;border radius:50%;background:#fff;opacity:.85;}
+.p1{background image:radial gradient(rgba(255,255,255,.16) 2px, transparent 2px);background size:12px 12px;background color:#365C3B;}
+.p2{background image:repeating linear gradient(45deg, rgba(255,255,255,.12) 0 6px, transparent 6px 12px);background color:#4F7C6B;}
+.p3{background image:repeating linear gradient( 45deg, rgba(255,255,255,.12) 0 6px, transparent 6px 12px);background color:#2F4F3A;}
+.p4{background image:radial gradient(rgba(255,255,255,.18) 2px, transparent 2px);background size:16px 16px;background color:#D98B5F;}
+.p5{background image:repeating linear gradient(90deg, rgba(255,255,255,.14) 0 4px, transparent 4px 14px);background color:#EDA857;}
+
+.card phrase{
+background:#fff;border:1px solid var(--line);transform:rotateY(180deg);
+font family:'Noto Serif TC',serif;font size:12.5px;line height:1.5;text align:center;color:var(--ink);
+box shadow:0 6px 16px rgba(43,51,40,.10);
+}
+.card:focus visible .card inner{outline:2px solid var(--accent deep);outline offset:3px;border radius:14px;}
+.cards actions{display:flex;justify content:center;gap:10px;margin top:6px;flex wrap:wrap;}
+
+footer{margin top:36px;padding top:16px;border top:1px solid var(--line);color:var(--ink soft);font size:12.5px;}
+
+@media (prefers reduced motion: reduce){
+.card inner{transition:none;}
+section.panel.active{animation:none;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+<div class="eyebrow">情緒顆粒度 · EMOTIONAL GRANULARITY</div>
+<h1>讓情緒流動</h1>
+<p class="lead">讓表達情緒更自如。</p>
+<p class="manifesto">學會命名情緒，並非是情緒詞語的有限性阻礙了我們的表達，而是身處情緒的世界、分辨情緒的顆粒度時，我們才能找到更貼近自己的表達。</p>
+</header>
+
+<nav class="tabbar" role="tablist" aria label="功能切換">
+<button class="active" role="tab" aria selected="true" data tab="bank">詞語庫</button>
+<button role="tab" aria selected="false" data tab="write">寫心情</button>
+<button role="tab" aria selected="false" data tab="cards">抽卡打氣</button>
+</nav>
+
+<!-- 詞語庫 -->
+<section class="panel active" id="panel bank">
+<h2 class="section title">先選一種情緒</h2>
+<p class="section sub">每種情緒備了學術說法、日常說法、地道廣東話、English 四個角度，各附三句例句。</p>
+<div class="chip row" id="chipRow"></div>
+<div id="bankArea" aria live="polite"></div>
+</section>
+
+<!-- 寫心情 -->
+<section class="panel" id="panel write">
+<h2 class="section title">寫下此刻的感受</h2>
+<p class="section sub">1～1000 字都可以，寫完點一下按鈕，我幫你看看這大概是什麼心情，再給幾個詞語參考。</p>
+<textarea id="moodInput" maxlength="1000" placeholder="今天發生了什麼事，讓你有這樣的心情呢……"></textarea>
+<div class="write meta">
+<span id="charCount">0 / 1000</span>
+<div style="display:flex;gap:8px;">
+<button class="btn ghost" id="clearTextBtn">清空</button>
+<button class="btn primary" id="detectBtn">幫我看看這是什麼心情</button>
+</div>
+</div>
+<div id="resultArea" hidden aria live="polite"></div>
+</section>
+
+<!-- 抽卡 -->
+<section class="panel" id="panel cards">
+<h2 class="section title">抽張卡，給自己一點力量</h2>
+<p class="section sub">一共五張，翻開一張也好，五張都翻開也好，看看今天想收到哪些話。</p>
+<div class="card grid" id="cardGrid"></div>
+<div class="cards actions">
+<button class="btn ghost" id="resetFlipBtn">復原本組卡片</button>
+<button class="btn ghost" id="redrawBtn">換一組卡，重新抽</button>
+</div>
+</section>
+
+<footer>
+這裡的詞語和卡片只是表達上的小參考。如果某種情緒持續困擾你，也很值得找信任的人，或專業人士聊聊。
+</footer>
+</div>
+
+<script>
+/* ============ 完整情緒資料 10組 ============ */
+const EMO = {
+happy:{
+label:"開心 / 快樂", emoji:"😊", cls:"chip happy",
+keywords:["開心","高興","快樂","愉快","興奮","喜悅","滿足","幸福","開森","樂"],
+words:{
+academic:[
+{term:"愉悅感", reading:"yú yuè gǎn", def:"心理學術語，指由積極事件引發的、伴隨身心放鬆的正向情緒體驗。", examples:[
+"完成這個項目後，她感受到一種深深的愉悅感。",
+"研究顯示，規律運動能夠顯著提升人的愉悅感。",
+"愉悅感往往是短暫的，但能帶來長期的心理韌性。"
+]},
+{term:"欣快感", reading:"xīn kuài gǎn", def:"精神醫學用語，指強烈、有時略帶興奮性質的愉快情緒狀態。", examples:[
+"登頂那一刻，他體驗到一陣少見的欣快感。",
+"適度的欣快感有助於提升創造力與社交意願。",
+"長期停留在欣快感裡，反而可能讓人忽略潛在風險。"
+]}
+],
+casual:[
+{term:"美滋滋", def:"形容因滿意、得意而感到舒服愉快，帶點小得意的樣子。", examples:[
+"拿到offer那天，我美滋滋地請自己吃了頓大餐。",
+"他美滋滋地跟朋友炫耀新買的球鞋。",
+"考試考得不錯，她一整天都美滋滋的。"
+]},
+{term:"心花怒放", def:"形容內心極度高興、喜悅，像花一樣盛開綻放。", examples:[
+"收到錄取通知的瞬間，他心花怒放。",
+"看到孩子第一次學會走路，媽媽心花怒放。",
+"旅行計劃終於成行，她心花怒放了好幾天。"
+]}
+],
+canton:[
+{term:"爽", reading:"soeng2", def:"廣東話常用詞，形容感覺非常好、暢快、滿足。", examples:[
+"今日放咗假去玩，真係爽到飛起！",
+"食完呢餐真係爽，好滿足。",
+"同班friend打波打到出晒汗，好爽！"
+]},
+{term:"興到飛起", reading:"hing3 dou3 fei1 hei2", def:"形容興奮到極點，開心得幾乎控制唔到自己。", examples:[
+"聽到呢個消息，佢興到飛起，即刻打電話同屋企人講。",
+"見到偶像本人，粉絲興到飛起，尖叫晒。",
+"抽中演唱會飛，佢興到飛起，成晚瞓唔著。"
+]}
+],
+english:[
+{term:"elated", def:"Feeling very happy, proud, or excited, often due to a success.", examples:[
+"She was elated when she heard the news of her promotion.",
+"The whole team felt elated after winning the championship.",
+"He couldn't stop smiling, elated by the unexpected gift."
+]},
+{term:"content", def:"A calm, settled feeling of satisfaction and peace.", examples:[
+"After the long hike, she felt calm and content watching the sunset.",
+"He seemed genuinely content with his simple, quiet life.",
+"Even without much, they were content just being together."
+]}
+]
+},
+encouragements:[
+"能好好感受快樂，是一件很值得珍惜的事，願這份好心情多陪你一會兒。",
+"你的開心值得被看見，也值得被好好記錄下來。",
+"把快樂寫下來，其實也是在為自己積攢力量，繼續加油。",
+"謝謝你願意分享這份喜悅，希望這樣的時刻常常發生在你身上。"
+]
+},
+excited:{
+label:"亢奮 / 期待", emoji:"✨", cls:"chip excited",
+keywords:["期待","亢奮","雀躍","興奮","熱血","盼望","躍躍欲試"],
+words:{
+academic:[
+{term:"喚起度提升", reading:"huàn qǐ dù tí shēng", def:"情緒心理學概念，正向高喚起狀態，心理生理活動被顯著激活，充滿動力。", examples:[
+"臨近出發旅行，個人的情緒喚起度明顯提升。",
+"適度的喚起度提升有利創意發想，過高會干擾判斷。",
+"睡眠不足會放大亢奮狀態，容易出現過度興奮。"
+]},
+{term:"預期喜悅", reading:"yù qī xǐ yuè", def:"對未來即將發生好事而提前產生的愉悅期待感。", examples:[
+"拆禮物前的預期喜悅，有時比收到禮物更動人。",
+"預期喜悅是人類重要的正向情緒資源。",
+"即使計劃被推遲，曾經的預期喜悅依然真實。"
+]}
+],
+casual:[
+{term:"躍躍欲試", def:"內心充滿期待，很想要趕快嘗試某件事情。", examples:[
+"新遊戲剛發布，大家都躍躍欲試。",
+"聽完講座，我對新的目標躍躍欲試。",
+"終於等到假期，全家人躍躍欲試準備出門。"
+]},
+{term:"熱血沸騰", def:"被事件感染，內心滿滿熱情、衝勁十足。", examples:[
+"看完演講，整個人熱血沸騰想要好好努力。",
+"比賽現場讓觀眾個個熱血沸騰。",
+"聽到這個構想，團隊頓時熱血沸騰。"
+]}
+],
+canton:[
+{term:"high爆", reading:"hai4 baau3", def:"情緒亢奮到頂點，非常興奮。", examples:[
+"音樂會現場成場high爆，氣氛超好。",
+"同朋友出去玩成晚high爆，完全唔想返屋企。",
+"抽到大獎，佢即刻high爆。"
+]},
+{term:"心心念念", reading:"sam1 sam1 nim4 nim4", def:"心裡一直掛住、滿心期待一件事。", examples:[
+"心心念念嘅旅行終於要到。",
+"呢部戲我心心念念等咗好耐。",
+"心心念念想見嘅朋友終於可以見面。"
+]}
+],
+english:[
+{term:"thrilled", def:"Extremely excited and pleased.", examples:[
+"She was thrilled about the upcoming trip.",
+"We were thrilled to hear your good news.",
+"He felt thrilled before the performance."
+]},
+{term:"eager", def:"Wanting very much to do or have something.", examples:[
+"Children are always eager for the holiday.",
+"She is eager to start her new project.",
+"They were eager to meet their old friends."
+]}
+]
+},
+encouragements:[
+"滿懷期待的感覺很珍貴，好好享受這份熱切。",
+"這份亢奮代表你對生活還抱著熱情，是很美好的狀態。",
+"不用急著讓興奮退去，允許自己沉浸在這份開心之中。",
+"願你所期待的事情，多數都能如願到來。"
+]
+},
+sad:{
+label:"難過 / 悲傷", emoji:"😢", cls:"chip sad",
+keywords:["難過","傷心","悲傷","想哭","哭","低落","失落","心痛","沮喪","難受"],
+words:{
+academic:[
+{term:"哀傷", reading:"āi shāng", def:"心理學與哀傷輔導中常用的術語，指因失去（如離別、喪失）而產生的深沉悲痛情緒。", examples:[
+"親人離世後，她花了很長時間處理這份哀傷。",
+"哀傷輔導的目標不是消除悲傷，而是學會與它相處。",
+"每個人經歷哀傷的方式和時長都不一樣，沒有標準答案。"
+]},
+{term:"情緒低落", reading:"qíng xù dī luò", def:"常用於描述心境持續處於低沉、缺乏動力狀態的心理學表達。", examples:[
+"最近他情緒低落，做什麼都提不起勁。",
+"睡眠不足往往會加重情緒低落的感覺。",
+"如果情緒低落持續兩週以上，可以考慮尋求專業支持。"
+]}
+],
+casual:[
+{term:"心裡堵得慌", def:"形容心裡憋悶、難受，有種說不出的沉重感。", examples:[
+"看完那部電影，我心裡堵得慌，一句話都說不出來。",
+"被朋友誤會之後，她心裡堵得慌，睡不著覺。",
+"工作不順利的時候，總覺得心裡堵得慌。"
+]},
+{term:"眼眶發熱", def:"形容快要哭出來、情緒即將決堤的狀態。", examples:[
+"聽到那句話，他眼眶一下子就發熱了。",
+"看到久違的家人，她眼眶發熱，說不出話。",
+"讀到那段文字，很多讀者都眼眶發熱。"
+]}
+],
+canton:[
+{term:"灰", reading:"fui1", def:"廣東話形容心情低落、灰暗、冇晒希望嘅感覺。", examples:[
+"最近工作唔順利，成日都覺得好灰。",
+"睇完套戲個結局，成班人都灰晒。",
+"考試肥咗，佢灰到唔想講嘢。"
+]},
+{term:"頹", reading:"teoi4", def:"廣東話形容情緒低落、冇晒動力、成個人有啲頹廢嘅狀態。", examples:[
+"今日成日頹喺屋企，乜都唔想做。",
+"分手之後佢頹咗成個星期。",
+"考試前佢仲喺度頹緊，冇心機溫書。"
+]}
+],
+english:[
+{term:"sorrowful", def:"Feeling or expressing deep sadness or grief.", examples:[
+"She wrote a sorrowful letter after her grandmother passed away.",
+"His voice sounded sorrowful when he talked about the move.",
+"The whole town felt sorrowful after the news broke."
+]},
+{term:"downcast", def:"Feeling sad and low in spirit, often showing it in one's expression.", examples:[
+"He looked downcast after failing the interview.",
+"She seemed downcast for days after the argument.",
+"Even good news couldn't lift his downcast mood."
+]}
+]
+},
+encouragements:[
+"難過的時候，允許自己慢下來，這份感受本身就值得被溫柔對待。",
+"謝謝你願意如實說出這份難過，這已經是很勇敢的一步。",
+"不用急著讓自己好起來，慢慢來就好。",
+"每一次把情緒寫下來，都是在照顧自己，你做得很好。"
+]
+},
+angry:{
+label:"生氣 / 憤怒", emoji:"😠", cls:"chip angry",
+keywords:["生氣","憤怒","氣死","惱火","火大","不爽","煩躁","氣"],
+words:{
+academic:[
+{term:"憤怒情緒", reading:"fèn nù qíng xù", def:"心理學基本情緒之一，通常由感知到的不公、受阻或被侵犯而引發的強烈負性喚醒狀態。", examples:[
+"憤怒情緒本身並不可怕，關鍵在於如何表達它。",
+"長期壓抑憤怒情緒，可能轉化為身體上的不適。",
+"學會識別憤怒情緒背後的需求，是情緒管理的第一步。"
+]},
+{term:"挫折反應", reading:"cuò zhé fǎn yìng", def:"指目標受阻時產生的緊張與憤怒交織的心理反應。", examples:[
+"計劃一再被打斷，他出現了明顯的挫折反應。",
+"孩子在遊戲失敗時的挫折反應，是成長中很常見的一部分。",
+"適當的挫折反應可以轉化為解決問題的動力。"
+]}
+],
+casual:[
+{term:"氣不打一處來", def:"形容突然感到非常生氣，氣得沒地方發洩。", examples:[
+"看到他又遲到，我真是氣不打一處來。",
+"被人搶功勞，她氣不打一處來，直接找主管理論。",
+"聽到這種藉口，誰都會氣不打一處來。"
+]},
+{term:"一肚子火", def:"形容心裡積壓了很多怒氣，隨時可能爆發。", examples:[
+"開了一天會，他憋了一肚子火。",
+"被冤枉之後，她一肚子火沒處說。",
+"塞車塞了兩個鐘頭，一肚子火全撒在方向盤上。"
+]}
+],
+canton:[
+{term:"燥底", reading:"cou3 dai2", def:"廣東話形容人脾氣火爆、容易發火嘅狀態。", examples:[
+"佢今日好燥底，講嘢都惡聲惡氣。",
+"天氣咁熱，個個都燥底晒。",
+"俾人催得咁緊，邊個唔燥底啊。"
+]},
+{term:"忟憎", reading:"man6 zang6", def:"廣東話形容因唔順心而煩躁、有氣冇處發嘅感覺。", examples:[
+"塞車塞咗成個鐘，忟憎到爆。",
+"電腦成日死機，睇住都忟憎。",
+"俾人放飛機，梗係忟憎啦。"
+]}
+],
+english:[
+{term:"irritated", def:"Feeling annoyed or slightly angry.", examples:[
+"She got irritated when the meeting ran an hour late.",
+"He sounded irritated on the phone about the delay.",
+"Small interruptions kept irritating her all afternoon."
+]},
+{term:"infuriated", def:"Extremely angry; filled with rage.", examples:[
+"He was infuriated by the unfair decision.",
+"The comment left her absolutely infuriated.",
+"Fans were infuriated after the last minute cancellation."
+]}
+]
+},
+encouragements:[
+"生氣說明有些東西對你來說很重要，這份感受值得被認真對待。",
+"憤怒不是壞事，它在提醒你有界線被觸碰了，先深呼吸一下。",
+"謝謝你沒有把這股火憋在心裡，說出來是很好的釋放方式。",
+"給自己一點時間冷靜，你已經在很好地面對這個情緒了。"
+]
+},
+anxious:{
+label:"焦慮 / 不安", emoji:"😟", cls:"chip anxious",
+keywords:["焦慮","擔心","緊張","不安","慌","壓力大","害怕","忐忑"],
+words:{
+academic:[
+{term:"焦慮情緒", reading:"jiāo lǜ qíng xù", def:"心理學術語，指對未來不確定威脅產生的緊張、擔憂與警覺狀態，常伴隨生理喚醒。", examples:[
+"適度的焦慮情緒能提高專注力，過度則會影響表現。",
+"她學著用呼吸練習去緩解考前的焦慮情緒。",
+"焦慮情緒長期存在時，建議尋求專業評估。"
+]},
+{term:"預期性焦慮", reading:"yù qī xìng jiāo lǜ", def:"指在事件發生前，因預想負面結果而產生的持續緊張情緒。", examples:[
+"面試前幾天，他就開始出現預期性焦慮。",
+"預期性焦慮常常比事情本身還要讓人難受。",
+"寫下最壞的可能，有時能減輕預期性焦慮。"
+]}
+],
+casual:[
+{term:"心裡沒底", def:"形容對某件事沒有把握，感到不安、不踏實。", examples:[
+"第一次上台演講，我心裡沒底。",
+"這個方案能不能通過，他心裡沒底。",
+"換新工作前，心裡沒底是很正常的。"
+]},
+{term:"七上八下", def:"形容心情起伏不定、忐忑不安的狀態。", examples:[
+"等成績的那幾天，她心裡七上八下的。",
+"手術前，一家人的心都七上八下。",
+"等回覆的時候，我一直七上八下地滑手機。"
+]}
+],
+canton:[
+{term:"心大心細", reading:"sam1 daai6 sam1 sai3", def:"廣東話形容心情忐忑、猶豫不決、唔知點算好。", examples:[
+"見工前佢心大心細，唔知點準備。",
+"去唔去旅行呢個決定，佢心大心細咗成個星期。",
+"睇住個結果，成班人都心大心細。"
+]},
+{term:"頂唔順", reading:"ding2 m4 seon6", def:"廣東話形容壓力大到頂唔住、承受唔到嘅感覺。", examples:[
+"呢排功課同考試一齊嚟，真係頂唔順。",
+"成日OT，佢話真係頂唔順喇。",
+"一時間咁多嘢要決定，個個都頂唔順。"
+]}
+],
+english:[
+{term:"apprehensive", def:"Anxious or fearful about something that might happen.", examples:[
+"She felt apprehensive about the upcoming surgery.",
+"He was apprehensive walking into the new office.",
+"They grew apprehensive as the deadline got closer."
+]},
+{term:"overwhelmed", def:"Feeling buried or crushed by an excessive amount of pressure or emotion.", examples:[
+"With three deadlines at once, she felt completely overwhelmed.",
+"New parents often feel overwhelmed in the first few weeks.",
+"He took a short walk whenever he felt overwhelmed at work."
+]}
+]
+},
+encouragements:[
+"焦慮常常是在提醒你很在意這件事，先給自己一個深呼吸的空間。",
+"謝謝你願意把這份不安說出來，你已經在很努力地照顧自己了。",
+"一步一步來就好，不需要馬上解決所有事情。",
+"你不是一個人在扛，把感受寫下來也是很好的開始。"
+]
+},
+disgusted:{
+label:"厭惡 / 煩躁", emoji:"😒", cls:"chip disgusted",
+keywords:["厭惡","煩躁","討厭","嫌棄","無聊","悶","不耐煩","反感","頂衰","過晒火"],
+words:{
+academic:[
+{term:"厭惡情緒", reading:"yàn wù qíng xù", def:"基本情緒之一，由感知到的不潔、不道德或威脅性刺激引發，具有保護與迴避功能。", examples:[
+"厭惡情緒幫助人類遠離腐敗食物與病原體。",
+"道德厭惡與生理厭惡共享類似的大腦神經基礎。",
+"過度的厭惡情緒可能與某些強迫症狀有關。"
+]},
+{term:"情緒耗竭", reading:"qíng xù hào jié", def:"職業心理學概念，指長期壓力下情緒資源被耗盡，產生麻木、厭煩與去人格化。", examples:[
+"護理人員常因高壓工作而出現情緒耗竭。",
+"情緒耗竭是職業倦怠的核心維度之一。",
+"適時休假能有效預防情緒耗竭。"
+]},
+{term:"刺激過度負荷", reading:"cì jī guò dù fù hé", def:"環境心理學概念，指感官或情緒刺激超過個體處理能力，引發煩躁與迴避反應。", examples:[
+"噪音與擁擠會導致刺激過度負荷。",
+"都市人常處於刺激過度負荷的狀態而不自知。",
+"大自然環境能緩解刺激過度負荷帶來的煩躁。"
+]},
+{term:"心理抗拒", reading:"xīn lǐ kàng jù", def:"指當自由感受到威脅時，個體產生的反感與對抗心理，常表現為故意反向行為。", examples:[
+"愈被禁止的事物，愈引發心理抗拒。",
+"青少年對父母的過度控制常產生心理抗拒。",
+"廣告中的強硬說服會激發觀眾的心理抗拒。"
+]}
+],
+casual:[
+{term:"看不順眼", def:"形容對某人或某事的行為、樣子感到討厭、不滿意。", examples:[
+"他就是看不順眼別人過得比他好。",
+"這種浪費食物的行為讓人看不順眼。",
+"他們倆從第一天起就互相看不順眼。"
+]},
+{term:"煩不勝煩", def:"形容煩躁到無法忍受，事情太多或太瑣碎讓人崩潰。", examples:[
+"推銷電話天天打來，煩不勝煩。",
+"孩子的十萬個為什麼讓她煩不勝煩。",
+"這些繁瑣的手續讓人煩不勝煩。"
+]},
+{term:"索然無味", def:"形容事物枯燥乏味，完全提不起興趣。", examples:[
+"這部電影劇情平淡，看得索然無味。",
+"重複的工作讓他感到索然無味。",
+"沒有挑戰的生活讓人索然無味。"
+]},
+{term:"嗤之以鼻", def:"用鼻子哼氣表示輕蔑，形容極度鄙視與不屑。", examples:[
+"他對這種投機行為嗤之以鼻。",
+"她嗤之以鼻地拒絕了那份不合理的合約。",
+"真正的專家對這種偽科學嗤之以鼻。"
+]},
+{term:"如鯁在喉", def:"形容心裡有話或情緒堵著，不吐不快，極度難受。", examples:[
+"這件事讓他如鯁在喉，整整憋了一星期。",
+"被誤會的感覺如鯁在喉，她終於決定說清楚。",
+"那種委屈如鯁在喉，睡不著也吃不下。"
+]}
+],
+canton:[
+{term:"悶到抽筋", reading:"mun6 dou3 cau1 gan1", def:"無聊到肌肉抽筋；極度枯燥乏味。", examples:[
+"個講座聽咗三個鐘，悶到抽筋。",
+"成日喺屋企冇嘢做，悶到抽筋。",
+"呢份工日日做同樣嘢，悶到抽筋。"
+]},
+{term:"忟憎", reading:"mang2 zang2", def:"心情煩躁、看什麼都不順眼（多因事情不順心）。", examples:[
+"塞車塞咗一個鐘，個人開始好忟憎。",
+"天氣又熱又濕，令人好忟憎。",
+"俾人放飛機，梗係忟憎啦。"
+]},
+{term:"煩躁", reading:"faan4 cou3", def:"心神不定、焦躁易怒。", examples:[
+"天氣又熱又濕，令人好煩躁。",
+"成日聽到裝修聲，好煩躁。",
+"做唔完嘅嘢搞到佢好煩躁。"
+]},
+{term:"頂衰", reading:"ding2 seoi1", def:"極度倒楣、討厭、讓人反感。", examples:[
+"今日出門口又落雨又撞車，真係頂衰。",
+"成日遲到嘅人真係頂衰。",
+"俾人呃咗錢，真係頂衰。"
+]},
+{term:"過晒火", reading:"gwo3 saai3 fo2", def:"玩火玩過頭；別人的行為超越底線，讓人極度嫌棄。", examples:[
+"佢開埋啲無聊玩笑，真係過晒火。",
+"遲到半個鐘仲唔道歉，真係過晒火。",
+"喺公司講人壞話講到咁盡，過晒火。"
+
